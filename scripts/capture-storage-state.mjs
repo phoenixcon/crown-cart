@@ -3,6 +3,10 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import readline from "node:readline";
 
+import { loadEnvConfig } from "@next/env";
+
+loadEnvConfig(process.cwd());
+
 async function main() {
   const { chromium } = await import("playwright");
   const targetUrl =
@@ -10,11 +14,12 @@ async function main() {
   const statePath = path.resolve(
     process.env.HEADLESS_STORAGE_STATE || path.join(process.cwd(), "kroger-storage-state.json"),
   );
+  const browserChannel = process.env.PLAYWRIGHT_BROWSER_CHANNEL?.trim() || undefined;
 
   console.log("\n[storage] Launching Chromium so you can log into the store site.");
   console.log("[storage] When you finish logging in and the deals page loads, switch back here and press Enter.\n");
 
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: false, channel: browserChannel });
   const context = await browser.newContext({ viewport: { width: 1280, height: 720 } });
   const page = await context.newPage();
   await page.goto(targetUrl, { waitUntil: "load" });
