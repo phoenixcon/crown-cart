@@ -21,14 +21,20 @@ async function main() {
   console.log("\n[storage] Launching Chromium so you can log into the store site.");
   console.log("[storage] When you finish logging in and the deals page loads, switch back here and press Enter.\n");
 
-  const browser = await chromium.launch({ headless: false, channel: browserChannel });
-  const context = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+  const userDataDir = path.resolve(process.env.PLAYWRIGHT_USER_DATA_DIR || ".playwright-chrome-profile");
+  const context = await chromium.launchPersistentContext(userDataDir, {
+    headless: false,
+    channel: browserChannel,
+    viewport: { width: 1280, height: 720 },
+    ignoreDefaultArgs: ["--enable-automation"],
+    args: ["--disable-blink-features=AutomationControlled"],
+  });
   const page = await context.newPage();
   await page.goto(targetUrl, { waitUntil: "load" });
 
   await waitForEnter("Press Enter here once you see products on the page...");
   await context.storageState({ path: statePath });
-  await browser.close();
+  await context.close();
 
   await fs.chmod(statePath, 0o600).catch(() => {});
   console.log(`\n[storage] Saved browser session to ${statePath}`);
