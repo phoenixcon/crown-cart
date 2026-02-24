@@ -3,8 +3,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import readline from "node:readline";
 
-const { loadEnvConfig } = await import("@next/env");
-loadEnvConfig(process.cwd());
+const nextEnv = await import("@next/env");
+const loadEnvConfig = nextEnv.loadEnvConfig ?? nextEnv.default?.loadEnvConfig;
+if (typeof loadEnvConfig === "function") {
+  loadEnvConfig(process.cwd());
+}
 
 async function main() {
   const { chromium } = await import("playwright");
