@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-02-24T21:10:06.443Z",
+  "locationId": "62000074",
+  "department": "15",
+  "keywords": [
+    {
+      "term": "Buy5Save1ShopAll26P1"
+    }
+  ],
+  "limit": 50,
+  "totalApiCalls": 1,
+  "uniqueProducts": 0,
+  "metrics": [
+    {
+      "keyword": "Buy5Save1ShopAll26P1",
+      "query": "Buy5Save1ShopAll26P1",
+      "isRefinement": false,
+      "apiCalls": 1,
+      "saleItems": 0,
+      "totalReported": null,
+      "capped": false
+    }
+  ],
+  "items": []
+}

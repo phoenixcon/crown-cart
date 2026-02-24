@@ -1,0 +1,35 @@
+{
+  "name": "crown-cart",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "capture:state": "node ./scripts/capture-storage-state.mjs",
+    "kroger:test": "tsx scripts/test-kroger-connection.ts",
+    "kroger:find-store": "tsx scripts/find-kroger-location.ts",
+    "kroger:crawl-sample": "tsx scripts/sample-prefix-crawl.ts",
+    "kroger:crawl-dairy": "tsx scripts/crawl-dairy-grid.ts",
+    "kroger:search": "tsx scripts/search-kroger-keyword.ts",
+    "kroger:harvest-search": "tsx scripts/harvest-search-page.ts"
+  },
+  "dependencies": {
+    "next": "16.1.6",
+    "playwright": "^1.47.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}
