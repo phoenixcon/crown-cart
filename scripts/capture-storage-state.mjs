@@ -3,8 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import readline from "node:readline";
 
-import { loadEnvConfig } from "@next/env";
-
+const { loadEnvConfig } = await import("@next/env");
 loadEnvConfig(process.cwd());
 
 async function main() {
